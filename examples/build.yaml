@@ -1,0 +1,57 @@
+tool: vivado
+board: xczu7ev-ffvc1156-2-e
+runs:
+  - top: add2
+    clk: 4.0
+    files:
+      - operators.sv
+  - top: add4
+    clk: 4.0
+    files:
+      - operators.sv
+    generics: 
+      DW: 8
+  - top: add8
+    clk: 4.0
+    files:
+      - operators.sv
+    generics: 
+  - top: mul
+    clk: 2.5
+    files:
+      - operators.sv
+  - top: increment_by_n
+    clk: 4.0
+    files:
+      - operators.sv
+    generics: 
+      DW: 8
+      N: 8       
+  - top: equal
+    clk: 4.0
+    files:
+      - operators.sv
+    generics:       
+  - top: greater
+    clk: 4.0
+    files:
+      - operators.sv
+    generics:       
+  - top: greater_equal
+    clk: 4.0
+    files:
+      - operators.sv
+    generics:       
+  - top: ternary
+    clk: 4.0
+    files:
+      - operators.sv
+    generics:       
+  - top: test_if
+    clk: 4.0
+    files:
+      - operators.sv
+    generics:       
+
+
+    
