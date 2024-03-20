@@ -1,6 +1,11 @@
 tool: vivado
 board: xczu7ev-ffvc1156-2-e
 runs:
+  - top: cordic_top
+    clk: 4.0
+    files:
+      - cordic_top.sv
+      - cordic_0/cordic_0.xci
   - top: add2
     clk: 4.0
     files:

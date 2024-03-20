@@ -7,8 +7,12 @@ proc read_rtl {filename} {
         read_verilog -sv $filename
     } elseif {$file_extension eq ".v"} {
         read_verilog $filename
-    }  elseif {$file_extension eq ".xdc"} {
+    } elseif {$file_extension eq ".xdc"} {
         read_xdc $filename
+    } elseif {$file_extension eq ".xci"} {
+        read_ip $filename
+    } elseif {$file_extension eq ".bd"} {
+        read_bd $filename
     } else {
         puts "Unsupported file extension for file: $filename"
     }

@@ -164,3 +164,4 @@ build/
 *.jou
 *.log
 .Xil/
+*.gen/
