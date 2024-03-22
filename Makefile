@@ -3,7 +3,7 @@ SHELL := bash
 
 PART ?= xczu7ev-ffvc1156-2-e
 
-deps = $(shell cat build/$(TOP)/dependencies.f)
+deps = $(shell cat build/$(TOP)/synth.f)
 
 src_dir = $(CURDIR)/examples
 build_dir = $(CURDIR)/build

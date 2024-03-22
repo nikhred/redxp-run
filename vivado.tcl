@@ -120,7 +120,8 @@ if {[file extension $params(f)] eq ".f"} {
     puts $output_dir/synth.f
 }
 
-eval $generate_cmd
+update_compile_order -fileset sources_1
+
 if {$run > 0} {
     puts "running $synth_cmd"    
     eval $synth_cmd

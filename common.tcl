@@ -11,6 +11,9 @@ proc read_rtl {filename} {
         read_xdc $filename
     } elseif {$file_extension eq ".xci"} {
         read_ip $filename
+        
+        set ip_name [file rootname [file tail $filename]]
+        generate_target all [get_ips $ip_name]
     } elseif {$file_extension eq ".bd"} {
         read_bd $filename
     } else {
