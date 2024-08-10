@@ -100,7 +100,7 @@ if {$params(run) ne "bts"} {
 set dcp 0
 
 if {$params(synth) ne ""} {
-    append synth_cmd $params(synth)
+    append synth_cmd " " $params(synth)
 }
 
 puts "running $prj_cmd"
