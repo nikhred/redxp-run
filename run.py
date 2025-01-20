@@ -40,19 +40,21 @@ commands = []
 for run in data["runs"]:
     top = run["top"]
     clk = run["clk"]
+    output_dir = top
 
     absolute_paths = [os.path.join(yaml_dir, f) for f in run["files"]]
-
-    write_f(absolute_paths, top)
 
     generics = run.get('generics')
     synth_args = ""
     if(generics):
         for k,v in generics.items():
             synth_args += (f"-generic {k}={v} ")
+            output_dir += f"_{k.lower()}{v}"
+
+    write_f(absolute_paths, output_dir)
 
     # basic vivado command format
-    cmd = f"vivado -mode batch -source vivado.tcl -tclargs -part {board} -top {top} -synth \"{synth_args}\"> build/{top}/run.log" 
+    cmd = f"vivado -mode batch -source vivado.tcl -tclargs -part {board} -top {top} -synth \"{synth_args}\"> build/{output_dir}/run.log" 
     commands.append(cmd)
 
 # Create a pool with 4 worker processes

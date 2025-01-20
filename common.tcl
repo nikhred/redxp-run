@@ -30,3 +30,20 @@ proc read_f {filename} {
     }
     close $fp
 }
+
+proc get_generics {input_string} {
+    set result ""
+
+    # Use a regular expression to extract parameters in the format KEY=VALUE
+    set regex {([A-Za-z]+)=([0-9]+)}
+    foreach {fullmatch key value} [regexp -all -inline -nocase $regex $input_string] {
+        append result "_[string tolower $key][string tolower $value]"
+    }
+
+    # Remove the leading underscore if the result is not empty
+    if {[string length $result] > 0} {
+        set result [string range $result 1 end]
+    }
+
+    return $result
+}

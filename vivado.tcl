@@ -37,7 +37,8 @@ set part $params(part)
 set files $params(f)
 set top $params(top)
 set clk $params(clk)
-set output_dir build/$top
+set generics [get_generics $params(synth)]
+set output_dir "build/${top}_${generics}"
 file mkdir $output_dir
 
 # create_project [‑part <arg>] [‑force] [‑in_memory] [‑ip] [‑rtl_kernel][‑quiet] [‑verbose] [<name>] [<dir>]
