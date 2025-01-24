@@ -2,30 +2,25 @@ SHELL := bash
 .SHELLFLAGS := -eu -o pipefail -c
 
 PART ?= xczu7ev-ffvc1156-2-e
+OUTDIR ?= $(TOP)
+SYNTH_ARGS ?= 
 
-deps = $(shell cat build/$(TOP)/synth.f)
+deps = $(shell cat build/$(OUTDIR)/synth.f)
 
 src_dir = $(CURDIR)/examples
 build_dir = $(CURDIR)/build
 
 all: vivado
 .PHONY: all clean vivado add_deps
- 
-build/$(TOP)/done: vivado.tcl $(deps)
-	vivado -mode batch -source vivado.tcl -tclargs -part $(PART) -top $(TOP)
 
-# add_deps: build/$(TOP)/dependencies.f
-# 	deps=$$(cat build/$(TOP)/dependencies.f); \
-# 	echo "Dependencies: $$deps";
+build/$(OUTDIR)/done: vivado.tcl $(deps)	
+	vivado -mode batch -source vivado.tcl -tclargs -part $(PART) -top $(TOP) -out ${OUTDIR} -synth "${SYNTH_ARGS}"> build/${OUTDIR}/run.log
 
-# @$(shell cat $(DEPENDENCIES_FILE)) > $@
-# deps = $(shell cat build/$(TOP)/dependencies.f)
-
-vivado: build/$(TOP)/done
+vivado: build/$(OUTDIR)/done
 
 clean:
 	rm -f *.log
 	rm -f *.jou
 
-ultraclean:
+ultraclean: clean
 	rm -rf build

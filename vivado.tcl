@@ -10,6 +10,7 @@ set options {
     {clk.arg 4.0 "target clock frequency"}
     {part.arg "xczu7ev-ffvc1156-2-e" "part number. Default = xczu7ev-ffvc1156-2-e (one of the free ZU+ boards)"}
     {top.arg "" "name of the top module to be synthesised"}
+    {out.arg "" "name of the output dir"}
     {synth.arg "" "generic parameters - passed directly to synth design"}
     {run.arg "impl" "Run Vivado with options. synth and impl for out-of-context mode synthesis and implementation. bts for bitstream generation"}
 }
@@ -37,8 +38,8 @@ set part $params(part)
 set files $params(f)
 set top $params(top)
 set clk $params(clk)
-set generics [get_generics $params(synth)]
-set output_dir "build/${top}_${generics}"
+set output_dir build/$params(out)
+
 file mkdir $output_dir
 
 # create_project [‑part <arg>] [‑force] [‑in_memory] [‑ip] [‑rtl_kernel][‑quiet] [‑verbose] [<name>] [<dir>]
@@ -153,4 +154,5 @@ if {$dcp == 1} {
 # TODO: better reporting?
 report_utilization -hierarchical > $output_dir/utilization.txt
 
+puts "outdir = $output_dir"
 close [open $output_dir/done a]
